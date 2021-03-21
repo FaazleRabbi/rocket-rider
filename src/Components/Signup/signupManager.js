@@ -30,7 +30,6 @@ const fireEmailCreatingAccount = (data) => {
 
     //update
   var user = firebase.auth().currentUser;
-
   user
     .updateProfile({
       displayName: displayName,
