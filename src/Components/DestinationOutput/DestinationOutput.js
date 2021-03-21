@@ -1,37 +1,44 @@
-import React from 'react';
-import { useParams } from 'react-router';
+import React from "react";
+import { useParams } from "react-router";
 // import bike from '../../fakeData/bike';
-import vehicle from '../../fakeData/vehicle';
-import TimeDatePick from '../TimeDatePick/TimeDatePick';
-import VehicleType from '../VehicleType/VehicleType';
-
+import vehicle from "../../fakeData/vehicle";
+import TimeDatePick from "../TimeDatePick/TimeDatePick";
+import VehicleType from "../VehicleType/VehicleType";
 
 const DestinationOutput = (props) => {
-    const VehicleName = useParams();
-    const vehiclesType = VehicleName.VehicleName;
+  const VehicleName = useParams();
+  const vehiclesType = VehicleName.VehicleName;
 
-    const exactObject = vehicle.find( vehicle => vehicle.VehicleName === vehiclesType)
-    // console.log("vehicle", vehicle)
-    // console.log('VehicleName',VehicleName)
-    const {fromInput,toInput} = props.destinationInputValue;
-    // console.log(bike)
-    return (
-        <div className = 'bg-dark m-2 p-3 rounded'>
-            <div className="bg-success m-2 p-3 rounded">
-                <h4>from :{fromInput}</h4>
-                <h4>to :{toInput}</h4>
-            </div>
-            <div className="bg-white p-2 m-2 rounded text-center d-flex justify-content-around">
-                <h6 className='pt-1'>Date:</h6>
-                <TimeDatePick></TimeDatePick>
-            </div>
+  const exactObject = vehicle.find(
+    (vehicle) => vehicle.VehicleName === vehiclesType
+  );
 
-            {
-                exactObject && exactObject.bike.map(vehicle => <VehicleType vehicle = {vehicle}></VehicleType>)
-            }
-            
+  const a = exactObject[vehiclesType];
+  console.log("vehicle", exactObject);
+  console.log("a", a);
+  // console.log('VehicleName',VehicleName)
+  const { fromInput, toInput } = props.destinationInputValue;
+  // console.log(bike)
+  return (
+    <div className="border m-2 p-3 rounded">
+      <div className="bg-info text-white m-2 p-3 rounded">
+        <div className="d-flex justify-content-around">
+          <h4>From :</h4>
+          <h4>{fromInput}</h4>
         </div>
-    );
+        <div className="d-flex justify-content-around">
+          <h4>To :</h4>
+          <h4>{toInput}</h4>
+        </div>
+      </div>
+      <div className="bg-white p-2 m-2 rounded text-center d-flex justify-content-around">
+        <h6 className="pt-2">Date:</h6>
+        <TimeDatePick></TimeDatePick>
+      </div>
+
+      {a && a.map((vehicle) => <VehicleType vehicle={vehicle}></VehicleType>)}
+    </div>
+  );
 };
 
 export default DestinationOutput;

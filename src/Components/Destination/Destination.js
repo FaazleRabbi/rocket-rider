@@ -14,16 +14,16 @@ const Destination = () => {
     return (
         <div className="row">
             
-            <div className="col-md-4">
+            <div className="col-md-4 m-4 rounded ">
                 {
                     destinationInputValue.fromInput ? <DestinationOutput destinationInputValue={destinationInputValue} ></DestinationOutput> : <DestinationInput getValueFromChild = {getValueFromChild}></DestinationInput>
                 }
             </div>
             
             
-            <div className="col-md-7 bg-dark rounded">
-                {/* <GMap></GMap> */}
-                <h4>map</h4>
+            <div className="d-flex justify-content-center col-md-7 mt-5 bg-light rounded">
+                <GMap></GMap>
+               
             </div>
         </div>
     );

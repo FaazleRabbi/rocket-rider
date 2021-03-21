@@ -1,10 +1,9 @@
 import React, { useContext, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import { userContext } from "../../App";
-import { handleFirebaseGoogleSignIn } from "./LoginManger";
+import { fireSignin, handleFirebaseGoogleSignIn } from "./LoginManger";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-
 
 const Login = () => {
   const history = useHistory();
@@ -19,33 +18,40 @@ const Login = () => {
   };
 
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data) => setLoggedInUser(data);
+  const onSubmit = (data) => {
+    fireSignin(data).then((res) => console.log(res));
+    setLoggedInUser(data);
+  };
   return (
-    <div>
-      <div className='w-25'>
+    <div className='d-flex justify-content-center m-5'>
+      <div className="col-md-6">
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
             name="email"
             type="email"
             placeholder="email"
-            className='form-control'
+            className="form-control"
             ref={register({ required: true })}
           />
           {errors.exampleRequired && <span>This field is required</span>}
-          <br/>
+          <br />
           <input
-          className='form-control'
+            className="form-control"
             name="password"
             type="password"
+            placeholder="password"
             ref={register({ required: true })}
           />
           {errors.exampleRequired && <span>This field is required</span>}
 
-          <input className='form-control' type="submit" />
+          <input className="form-control mt-4 mb-2 btn-primary" type="submit" value='login' />
         </form>
+        <p>
+          Don't have an account? <Link to="/signup">Create an account</Link>{" "}
+        </p>
+        <button className='form-control btn-info ' onClick={handleGoogleLogin}>continue with google</button>
       </div>
-      <p>Don't have an account? <Link to='/signup'>Create an account</Link> </p>
-      <button onClick={handleGoogleLogin}>continue with google</button>
+      
     </div>
   );
 };

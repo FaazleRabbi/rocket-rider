@@ -5,71 +5,81 @@ import fireEmailCreatingAccount from "./signupManager";
 
 const Signup = () => {
   const [signupUser, setSignupUser] = useState({
-    name: "",
+    displayName: "",
     email: "",
     password: "",
   });
 
   const handleGoogleSignup = () => {};
   const { register, handleSubmit, errors } = useForm();
+
+  const [passwordError, setPasswordError] = useState("");
   const onSubmit = (data) => {
-    fireEmailCreatingAccount(data)
-    setSignupUser(data);
-    console.log(data)
-  }
-  console.log(signupUser);
+    if (data.password === data.passwordConfirm) {
+      fireEmailCreatingAccount(data);
+      setSignupUser(data);
+    } else {
+      setPasswordError("Password not matched");
+    }
+
+    console.log(data);
+  };
+  console.log("varifivatin", signupUser);
   return (
-    <div className='w-25'>
-      <form className="" onSubmit={handleSubmit(onSubmit)}>
-        <input
-          className="form-control m-2"
-          name="name"
-          placeholder="name"
-          ref={register({ required: true })}
-        />
-        {errors.name && <span>This field is required</span>}
+    <div className="d-flex justify-content-center m-5">
+      <div className="col-md-6 m-auto">
+        <form className="" onSubmit={handleSubmit(onSubmit)}>
+          {passwordError && (
+            <h6 className="text-danger m-2">{passwordError}</h6>
+          )}
+          <input
+            className="form-control m-2"
+            name="displayName"
+            placeholder="name"
+            ref={register({ required: true })}
+          />
+          {errors.displayName && <span>This field is required</span>}
 
-        <input
-          className="form-control m-2"
-          name="email"
-          placeholder="email"
-          ref={register({ required: true })}
-        />
-        {errors.email && <span>This field is required</span>}
+          <input
+            className="form-control m-2"
+            name="email"
+            placeholder="email"
+            ref={register({ required: true })}
+          />
+          {errors.email && <span>This field is required</span>}
 
-        <input
-          className="form-control m-2"
-          name="password"
-          placeholder="password"
-          ref={register({ required: true })}
-        />
-        {errors.password && <span>This field is required</span>}
+          <input
+            className="form-control m-2"
+            name="password"
+            placeholder="password"
+            ref={register({ required: true })}
+          />
+          {errors.password && <span>This field is required</span>}
 
-        <input
-          className="form-control m-2"
-          name="passwordConfirm"
-          placeholder="confirm password"
-          ref={register({ required: true })}
-        />
-        {errors.passwordConfirm && <span>This field is required</span>}
+          <input
+            className="form-control m-2"
+            name="passwordConfirm"
+            placeholder="confirm password"
+            ref={register({ required: true })}
+          />
+          {errors.passwordConfirm && <span>This field is required</span>}
 
-        <input
-          className="form-control m-2 btn-primary"
-          type="submit"
-          value="Create an account"
-        />
-        <p className="text-center">
-          Already have an account? <Link to="/login">Login</Link>{" "}
-        </p>
-
-        
-      </form>
-      <button
+          <input
+            className="form-control m-2 btn-primary"
+            type="submit"
+            value="Create an account"
+          />
+          <p className="text-center">
+            Already have an account? <Link to="/login">Login</Link>{" "}
+          </p>
+        </form>
+        <button
           onclick={handleGoogleSignup}
           className="btn btn-info form-control m-2"
         >
           Continue with google
         </button>
+      </div>
     </div>
   );
 };

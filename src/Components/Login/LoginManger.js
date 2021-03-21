@@ -9,6 +9,20 @@ if (!firebase.apps.length) {
 
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
+export const fireSignin = (data) => {
+  const {email,password} = data;
+  return firebase.auth().signInWithEmailAndPassword(email, password)
+  .then((userCredential) => {
+    // Signed in
+    var user = userCredential.user;
+    return user;
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    return errorMessage;
+  });
+}
 export const handleFirebaseGoogleSignIn = () => {
    return firebase
     .auth()

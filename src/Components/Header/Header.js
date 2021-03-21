@@ -8,10 +8,13 @@ const Header = () => {
   const handleLoginBtn = ()=>{
     history.push('login')
   }
+  const handleSignupBtn = ()=>{
+    history.push('signup')
+  }
   const [loggedInUser,setLoggedInUser] = useContext(userContext)
   console.log('hesder',loggedInUser)
   return (
-    <nav className="navbar navbar-expand-lg navbar-light  d-flex justify-content-around">
+    <nav  className="navbar navbar-expand-lg rocket-nav  d-flex justify-content-around">
       <div>
         <Link to="/home" className="logoText h2 ">
           Rocket Rider
@@ -44,8 +47,9 @@ const Header = () => {
               Contact
             </Link>
               <button onClick={handleLoginBtn} className="btn btn-primary  ml-2">Login</button>
+              <button onClick={handleSignupBtn} className="btn btn-primary  ml-2">signup</button>
               {
-                loggedInUser && loggedInUser.displayName && <h6 className="nav-item nav-link h6 active" >welcome <span className = 'text-success h5'> { ' '+ loggedInUser.displayName}</span></h6>
+                loggedInUser && loggedInUser.email && <h6 className="nav-item nav-link h6 active" >welcome <span className = 'text-success h5'> { ' '+ loggedInUser.email}</span></h6>
               }
           </div>
         </div>
