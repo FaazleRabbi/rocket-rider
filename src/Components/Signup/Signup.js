@@ -72,12 +72,7 @@ const Signup = () => {
             Already have an account? <Link to="/login">Login</Link>{" "}
           </p>
         </form>
-        <button
-          onclick={handleGoogleSignup}
-          className="btn btn-info form-control m-2"
-        >
-          Continue with google
-        </button>
+        
       </div>
     </div>
   );
