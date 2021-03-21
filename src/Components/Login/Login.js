@@ -1,9 +1,13 @@
 import React, { useContext, useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  useHistory,
+  useLocation
+} from "react-router-dom";
 import { userContext } from "../../App";
 import { fireSignin, handleFirebaseGoogleSignIn } from "./LoginManger";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 
 const Login = () => {
   const history = useHistory();
@@ -13,21 +17,27 @@ const Login = () => {
   const handleGoogleLogin = () => {
     handleFirebaseGoogleSignIn().then((res) => {
       setLoggedInUser(res);
-      console.log(from)
       history.replace(from);
     });
   };
 
+  const [loginError, setLoginError] = useState("");
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
-    fireSignin(data).then((res) => console.log(res));
-    setLoggedInUser(data);
-    console.log(from)
-    history.replace(from);
+    fireSignin(data).then((res) => {
+      if (res.email) {
+        setLoggedInUser(data);
+        history.replace(from);
+        setLoginError("");
+      } else {
+        setLoginError(res);
+      }
+    });
   };
   return (
-    <div className='d-flex justify-content-center m-5'>
+    <div className="d-flex justify-content-center m-5">
       <div className="col-md-6">
+        <h6 className="text-danger">{loginError}</h6>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
             name="email"
@@ -47,14 +57,19 @@ const Login = () => {
           />
           {errors.exampleRequired && <span>This field is required</span>}
 
-          <input className="form-control mt-4 mb-2 btn-primary" type="submit" value='login' />
+          <input
+            className="form-control mt-4 mb-2 btn-primary"
+            type="submit"
+            value="login"
+          />
         </form>
         <p>
           Don't have an account? <Link to="/signup">Create an account</Link>{" "}
         </p>
-        <button className='form-control btn-info ' onClick={handleGoogleLogin}>continue with google</button>
+        <button className="form-control btn-info " onClick={handleGoogleLogin}>
+          continue with google
+        </button>
       </div>
-      
     </div>
   );
 };

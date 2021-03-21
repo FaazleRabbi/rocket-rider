@@ -12,9 +12,7 @@ const Header = () => {
     history.push("signup");
   };
   const [loggedInUser, setLoggedInUser] = useContext(userContext);
-  console.log("hesder", loggedInUser);
 
-  //botstrap you
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
 
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
@@ -22,7 +20,7 @@ const Header = () => {
     <div>
       <nav class="navbar navbar-expand-lg navbar-light rocket-nav rounded d-md-flex justify-content-around">
         <div>
-          <Link to='/' class="navbar-brand text-info font-weight-bolder" href="/">
+          <Link to='/' class="navbar-brand text-info font-weight-bolder" >
             <span className="">Rocket Rider</span>
           </Link>
         </div>
@@ -74,63 +72,7 @@ const Header = () => {
           </div>
         </div>
       </nav>
-      {/* <nav className="navbar navbar-expand-lg rocket-nav  d-flex justify-content-around">
-        <div>
-          <Link to="/home" className="logoText h2 ">
-            Rocket Rider
-          </Link>
-        </div>
-        <div>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup"
-            aria-expanded="true"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-              <Link to="/home" className="nav-item nav-link  h6 active">
-                Home <span className="sr-only">(current)</span>
-              </Link>
-              <Link to="/destination" className="nav-item nav-link h6 active">
-                Destination
-              </Link>
-              <Link to="/blog" className="nav-item nav-link h6 active">
-                Blog
-              </Link>
-              <Link to="/contact" className="nav-item nav-link h6 active">
-                Contact
-              </Link>
-              <button
-                onClick={handleLoginBtn}
-                className="btn btn-primary  ml-2"
-              >
-                Login
-              </button>
-              <button
-                onClick={handleSignupBtn}
-                className="btn btn-primary  ml-2"
-              >
-                signup
-              </button>
-              {loggedInUser && loggedInUser.email && (
-                <h6 className="nav-item nav-link h6 active">
-                  welcome{" "}
-                  <span className="text-success h5">
-                    {" "}
-                    {" " + loggedInUser.email}
-                  </span>
-                </h6>
-              )}
-            </div>
-          </div>
-        </div>
-      </nav> */}
+      
     </div>
   );
 };

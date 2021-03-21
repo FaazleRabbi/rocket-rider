@@ -9,9 +9,9 @@
 3. private route are available
 
 ## pages
-1.home
-2.sign
-3.signup
-4.destination
+1. home
+2. sign
+3. signup
+4. destination
 
 

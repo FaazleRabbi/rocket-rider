@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./VehicleCard.css";
 
 const VehicleCard = (props) => {
-  console.log(props.vehicle);
   const { VehicleName, photoUrl, vehicleId } = props.vehicle;
   // console.log(props.vehicle.vehicleName)
   return (

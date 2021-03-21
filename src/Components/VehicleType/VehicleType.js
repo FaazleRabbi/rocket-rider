@@ -7,7 +7,7 @@ import DriveEtaIcon from '@material-ui/icons/DriveEta';
 
 const VehicleType = (props) => {
     console.log(props.vehicle);
-    const {passenger,type,cost,photoUrl,VehicleName} = props.vehicle;
+    const {passenger,cost,VehicleName} = props.vehicle;
     let Icon ;
     if(VehicleName ==='bike'){
         Icon = MotorcycleIcon
