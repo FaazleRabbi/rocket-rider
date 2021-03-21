@@ -1,28 +1,51 @@
 import React, { useContext, useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router";
 import { userContext } from "../../App";
-import { fireSignin, handleFirebaseGoogleSignIn } from "./LoginManger";
+// import { fireSignin, handleFirebaseGoogleSignIn } from "./LoginManger";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import firebaseConfig from "../Login/firebaseConfig";
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
 
-const Login = () => {
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+  
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
+const Signin = () => {
   const history = useHistory();
   const location = useLocation();
   const { from } = location.state || { from: { pathname: "/" } };
   const [loggedInUser, setLoggedInUser] = useContext(userContext);
   const handleGoogleLogin = () => {
-    handleFirebaseGoogleSignIn().then((res) => {
-      setLoggedInUser(res);
-      console.log(from)
+    firebase
+    .auth()
+    .signInWithPopup(googleProvider)
+    .then((result) => {
+      const user = result.user;
+      setLoggedInUser(user);
       history.replace(from);
     });
   };
 
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
-    fireSignin(data).then((res) => console.log(res));
+    const {email,password} = data;
+    firebase.auth().signInWithEmailAndPassword(email, password)
+  .then((userCredential) => {
+    // Signed in
+    console.log('sin')
+    var user = userCredential.user;
+    return user;
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    return errorMessage;
+  });
     setLoggedInUser(data);
-    console.log(from)
     history.replace(from);
   };
   return (
@@ -59,4 +82,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signin;

@@ -18,13 +18,12 @@ const Signup = () => {
     if (data.password === data.passwordConfirm) {
       fireEmailCreatingAccount(data);
       setSignupUser(data);
+      setPasswordError("");
     } else {
       setPasswordError("Password not matched");
     }
 
-    console.log(data);
   };
-  console.log("varifivatin", signupUser);
   return (
     <div className="d-flex justify-content-center m-5">
       <div className="col-md-6 m-auto">

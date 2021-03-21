@@ -9,13 +9,12 @@ const DestinationOutput = (props) => {
   const VehicleName = useParams();
   const vehiclesType = VehicleName.VehicleName;
 
-  const exactObject = vehicle.find(
+   const ChossenObject = vehicle.find(
     (vehicle) => vehicle.VehicleName === vehiclesType
   );
 
-  const a = exactObject[vehiclesType];
-  console.log("vehicle", exactObject);
-  console.log("a", a);
+  const chossenObjectChild = vehiclesType &&  ChossenObject[vehiclesType];
+  console.log("vehicle", ChossenObject);
   // console.log('VehicleName',VehicleName)
   const { fromInput, toInput } = props.destinationInputValue;
   // console.log(bike)
@@ -36,7 +35,7 @@ const DestinationOutput = (props) => {
         <TimeDatePick></TimeDatePick>
       </div>
 
-      {a && a.map((vehicle) => <VehicleType vehicle={vehicle}></VehicleType>)}
+      {chossenObjectChild && chossenObjectChild.map((vehicle) => <VehicleType vehicle={vehicle}></VehicleType>)}
     </div>
   );
 };

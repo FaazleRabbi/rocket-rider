@@ -15,6 +15,7 @@ import Signup from './Components/Signup/Signup';
 import Header from './Components/Header/Header';
 import { createContext, useState } from 'react';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
+import Signin from './Components/SignIn/Signin';
 
 export const userContext = createContext()
 function App() {
@@ -48,6 +49,9 @@ function App() {
         </Router>
         <Router path='/signup'>
           <Signup/>
+        </Router>
+        <Router path='/signin'>
+          <Signin/>
         </Router>
       </Switch>
     </Router>

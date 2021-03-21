@@ -16,7 +16,7 @@ const Destination = () => {
             
             <div className="col-md-4 m-4 rounded ">
                 {
-                    destinationInputValue.fromInput ? <DestinationOutput destinationInputValue={destinationInputValue} ></DestinationOutput> : <DestinationInput getValueFromChild = {getValueFromChild}></DestinationInput>
+                destinationInputValue && destinationInputValue.fromInput ? <DestinationOutput destinationInputValue={destinationInputValue} ></DestinationOutput> : <DestinationInput getValueFromChild = {getValueFromChild}></DestinationInput>
                 }
             </div>
             

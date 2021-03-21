@@ -20,6 +20,7 @@ export const fireSignin = (data) => {
   .catch((error) => {
     var errorCode = error.code;
     var errorMessage = error.message;
+    console.log(errorMessage,errorCode)
     return errorMessage;
   });
 }
@@ -36,6 +37,6 @@ export const handleFirebaseGoogleSignIn = () => {
       const errorCode = error.code;
       const errorMessage = error.message;
       const email = error.email;
-      console.log(errorMessage)
+      console.log(errorMessage,errorCode)
     });
 };
